@@ -10,7 +10,7 @@ import UIKit
 class ServiceRequestingImageView: UIImageView, APIDataProvidable {
     func fetchImage(with url: URL) {
         let request = URLRequest(url: url)
-        perform(request: request) { [weak self] result in
+        perform(request) { [weak self] result in
             switch result {
             case .success(let imageData):
                 guard let image = UIImage(data: imageData) else { return }

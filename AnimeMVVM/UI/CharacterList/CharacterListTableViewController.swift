@@ -9,28 +9,21 @@ import UIKit
 
 class CharacterListTableViewController: UITableViewController {
 
-    var characterListViewModel: CharacterListViewModel!
+    var viewModel: CharacterListViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        characterListViewModel = CharacterListViewModel(injectedDelegate: self)
+        viewModel = CharacterListViewModel(injectedDelegate: self)
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return characterListViewModel.characterList.count
+        return viewModel.characterList.count
     }
 
- 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "characterCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "characterCell", for: indexPath) as? CharacterTableViewCell else { return UITableViewCell() }
 
         // Configure the cell...
 
@@ -51,6 +44,9 @@ class CharacterListTableViewController: UITableViewController {
 
 extension CharacterListTableViewController: CharacterListViewModelDelegate {
     func characterListFetchedSuccessfully() {
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
+    
 }

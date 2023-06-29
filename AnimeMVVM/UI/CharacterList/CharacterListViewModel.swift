@@ -17,20 +17,21 @@ class CharacterListViewModel {
     weak var delegate: CharacterListViewModelDelegate?
     // SOT
     var characterList: [CharacterDataDictionary] = []
-    var service: CharacterListServicable
+    var service: CharacterListServiceable
     
     // Dependency Injection
     init(injectedDelegate: CharacterListViewModelDelegate, injectedCharacterService: CharacterListService = CharacterListService()) {
         self.delegate = injectedDelegate
         self.service = injectedCharacterService
+        fetchCharacterList()
     }
     
     func fetchCharacterList() {
         service.fetchCharacters { result in
             switch result {
             case .success(let tld):
-                self.characterList = tld.data
-                self.delegate?.characterListFetchedSuccessfully()
+                    self.characterList = tld.data
+                    self.delegate?.characterListFetchedSuccessfully()
             case.failure(let failure):
                 print(failure.localizedDescription)
             }

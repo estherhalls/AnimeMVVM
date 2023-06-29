@@ -8,18 +8,36 @@
 import UIKit
 
 class CharacterTableViewCell: UITableViewCell {
-
+    
+    @IBOutlet weak var characterNameLabel: UILabel!
     @IBOutlet weak var characterImageView: ServiceRequestingImageView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    //    override func awakeFromNib() {
+    //        super.awakeFromNib()
+    //        // Initialization code
+    //    }
+    //
+    //    override func setSelected(_ selected: Bool, animated: Bool) {
+    //        super.setSelected(selected, animated: animated)
+    //
+    //        // Configure the view for the selected state
+    //    }
+    
+    
+    private func fetchCharacter(with link: String){
+        
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    private func fetchImage(with url: String ) {
+        guard let imageURL = URL(string: url) else { return }
+        characterImageView.fetchImage(with: imageURL)
     }
+    
+}
 
+extension CharacterTableViewCell {
+    func configureCell(with character: Attributes) {
+        characterNameLabel.text = character.canonicalName
+        fetchImage(with: character.imageDictionary.medium)
+    }
 }
