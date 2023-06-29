@@ -12,17 +12,19 @@ class CharacterTableViewCell: UITableViewCell {
     @IBOutlet weak var characterNameLabel: UILabel!
     @IBOutlet weak var characterImageView: ServiceRequestingImageView!
     
-    //    override func awakeFromNib() {
-    //        super.awakeFromNib()
-    //        // Initialization code
-    //    }
-    //
-    //    override func setSelected(_ selected: Bool, animated: Bool) {
-    //        super.setSelected(selected, animated: animated)
-    //
-    //        // Configure the view for the selected state
-    //    }
+        override func awakeFromNib() {
+            super.awakeFromNib()
+            // Initialization code
+        }
     
+        override func setSelected(_ selected: Bool, animated: Bool) {
+            super.setSelected(selected, animated: animated)
+    
+            // Configure the view for the selected state
+        }
+    
+    // View Model:
+    var viewModel: CharacterCellViewModel!
     
     private func fetchCharacter(with link: String){
         
@@ -35,8 +37,10 @@ class CharacterTableViewCell: UITableViewCell {
     
 }
 
-extension CharacterTableViewCell {
+extension CharacterTableViewCell: CharacterCellViewModelDelegate {
+
     func configureCell(with character: Attributes) {
+        
         characterNameLabel.text = character.canonicalName
         fetchImage(with: character.imageDictionary.medium)
     }

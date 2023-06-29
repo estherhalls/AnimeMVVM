@@ -16,8 +16,8 @@ struct CharacterListService: APIDataProvidable, CharacterListServiceable {
     // Today only looking for characters from SpiritidAway. TODO: - update to fetch characters from any anime
     func fetchCharacters(callback: @escaping(Result<ListTLD, NetworkError>) -> Void) {
         // Compose URL
-        guard let finalURL = URL(string: "https://kitsu.io/api/edge/anime/176/characters") else {callback(.failure(.invalidURL)); return}
-        var urlRequest = URLRequest(url: finalURL)
+        guard let finalURL = URL(string: "https://kitsu.io/api/edge/anime/176/characters") else {callback(.failure(.invalidURL)); return }
+        let urlRequest = URLRequest(url: finalURL)
         // DataTask
         perform(urlRequest) { result in
             switch result {

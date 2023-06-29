@@ -7,16 +7,16 @@
 
 import Foundation
 
-struct CharacterTLD {
+struct CharacterTLD: Decodable {
     let data: CharacterData
 }
 
-struct CharacterData {
+struct CharacterData: Decodable {
     let id: String
     let attributes: Attributes
 }
 
-struct Attributes {
+struct Attributes: Decodable {
     private enum CodingKeys: String, CodingKey {
         case canonicalName
         case imageDictionary = "image"
@@ -30,9 +30,9 @@ struct Attributes {
     let description: String
 }
 
-struct ImageDictionary {
+struct ImageDictionary: Decodable {
     // The image url I need for my fetch image
     let medium: String
 }
 
-// Endpoint:
+

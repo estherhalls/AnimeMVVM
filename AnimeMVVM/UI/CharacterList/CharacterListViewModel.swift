@@ -12,12 +12,12 @@ protocol CharacterListViewModelDelegate: CharacterListTableViewController {
 }
 
 class CharacterListViewModel {
-    
+    // MARK: - Properties
     // This protocol/delegate sends information from view model to table view when the data was successfully fetched from API
     weak var delegate: CharacterListViewModelDelegate?
     // SOT
     var characterList: [CharacterDataDictionary] = []
-    var service: CharacterListServiceable
+    private let service: CharacterListServiceable
     
     // Dependency Injection
     init(injectedDelegate: CharacterListViewModelDelegate, injectedCharacterService: CharacterListService = CharacterListService()) {
@@ -25,8 +25,8 @@ class CharacterListViewModel {
         self.service = injectedCharacterService
         fetchCharacterList()
     }
-    
-    func fetchCharacterList() {
+    // MARK: - Methods
+    func fetchCharacterList(){
         service.fetchCharacters { result in
             switch result {
             case .success(let tld):

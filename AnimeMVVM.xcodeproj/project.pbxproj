@@ -128,10 +128,10 @@
 		EB2A40EF2A4DF3F6001DA269 /* CharacterCell */ = {
 			isa = PBXGroup;
 			children = (
-				EB2A40ED2A4DF3F2001DA269 /* CharacterTableViewCell.swift */,
-				EB2A40F02A4DF40C001DA269 /* CharacterCellViewModel.swift */,
 				EB2A40F22A4DFE1F001DA269 /* ServiceRequestingImageView.swift */,
 				EB2A40F82A4E299B001DA269 /* CharacterService.swift */,
+				EB2A40ED2A4DF3F2001DA269 /* CharacterTableViewCell.swift */,
+				EB2A40F02A4DF40C001DA269 /* CharacterCellViewModel.swift */,
 			);
 			path = CharacterCell;
 			sourceTree = "<group>";

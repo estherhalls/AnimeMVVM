@@ -24,9 +24,8 @@ class CharacterListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "characterCell", for: indexPath) as? CharacterTableViewCell else { return UITableViewCell() }
-
-        // Configure the cell...
-
+        let selectedCharacter = viewModel.characterList[indexPath.row]
+        cell.viewModel = CharacterCellViewModel(listResult: selectedCharacter, injectedDelegate: cell)
         return cell
     }
 
