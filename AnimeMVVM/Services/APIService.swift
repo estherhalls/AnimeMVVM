@@ -19,14 +19,13 @@ import Foundation
 ///     - NetworkingError: A custom error type
 ///
 protocol APIDataProvidable {
-    func perform( request: URLRequest, completion: @escaping (Result<Data, NetworkError>) -> Void)
+    func perform(request: URLRequest, completion: @escaping (Result<Data, NetworkError>) -> Void)
 }
 
 extension APIDataProvidable {
     /// Extention of the APIDataProvidable protocol
-    ///
     /// This is used to provide a default implementaion of the .perform(_ request: URLRequest) protocol method.
-    func perform(_ request: URLRequest, completion: @escaping (Result<Data, NetworkError>) -> Void) {
+    func perform(request: URLRequest, completion: @escaping (Result<Data, NetworkError>) -> Void) {
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error {
                 completion(.failure(.thrownError(error)))

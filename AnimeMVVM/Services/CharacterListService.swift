@@ -6,17 +6,21 @@
 //
 
 import Foundation
+// Remove concrete type relatioships and rely on abstraction
+protocol CharacterListServicable {
+    func fetchCharacters(callback: @escaping(Result<ListTLD, NetworkError>) -> Void)
+}
 
-struct CharacterListService: APIDataProvidable {
+struct CharacterListService: APIDataProvidable, CharacterListServicable {
     // Today only looking for characters from SpiritidAway. TODO: - update to fetch characters from any anime
     func fetchCharacters(callback: @escaping(Result<ListTLD, NetworkError>) -> Void) {
         // Compose URL
         guard let finalURL = URL(string: "https://kitsu.io/api/edge/anime/176/characters") else {callback(.failure(.invalidURL)); return}
         var urlRequest = URLRequest(url: finalURL)
         // DataTask
-        perform(urlRequest) { result in
+        perform(request: urlRequest) { result in
             switch result {
-            case.success(let charactersData):
+            case .success(let charactersData):
                 // Decode the data
                 do {
                     let decodedListTLD = try JSONDecoder().decode(ListTLD.self, from: charactersData)
@@ -24,10 +28,9 @@ struct CharacterListService: APIDataProvidable {
                 } catch {
                     callback(.failure(.thrownError(error)))
                 }
-            case.failure:
+            case .failure(_):
                 callback(.failure(.unableToDecode))
             }
         }
-        // Decode Data
     }
 }
