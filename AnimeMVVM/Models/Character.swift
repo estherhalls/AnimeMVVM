@@ -20,19 +20,19 @@ struct Attributes: Decodable {
     private enum CodingKeys: String, CodingKey {
         case canonicalName
         case imageDictionary = "image"
-        case characterID = "malID"
+        case characterID = "malId"
         case description
     }
     
     let canonicalName: String
     let imageDictionary: ImageDictionary
-    let characterID: String
+    let characterID: Int
     let description: String
 }
 
 struct ImageDictionary: Decodable {
     // The image url I need for my fetch image
-    let medium: String
+    let original: String
 }
 
 
